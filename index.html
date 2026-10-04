@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple task management board for organising and tracking work.">
+    <title>Task Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-icon">TB</div>
+
+                <div>
+                    <h1>Task Board</h1>
+                    <p>Plan your work. Track your progress.</p>
+                </div>
+            </div>
+
+            <button class="add-task-btn" id="open-modal">
+                + Add Task
+            </button>
+        </header>
+
+        <main class="main-content">
+
+            <section class="intro-section">
+                <div class="intro-text">
+                    <p class="small-heading">MY WORKSPACE</p>
+                    <h2>Stay on top of your tasks.</h2>
+                    <p>
+                        Add tasks, move them between stages and keep track of
+                        what you have completed.
+                    </p>
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat-box">
+                        <span>Total Tasks</span>
+                        <strong id="total-count">0</strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>In Progress</span>
+                        <strong id="progress-count">0</strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>Completed</span>
+                        <strong id="done-count">0</strong>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="board">
+
+                <div class="board-column" data-status="todo">
+
+                    <div class="column-title">
+                        <div>
+                            <span class="status-dot todo-dot"></span>
+                            <h3>To Do</h3>
+                        </div>
+
+                        <span class="task-count" id="todo-count">0</span>
+                    </div>
+
+                    <div class="task-list" id="todo-list"></div>
+
+                    <button class="add-column-task" data-add-status="todo">
+                        + Add task
+                    </button>
+
+                </div>
+
+
+                <div class="board-column" data-status="progress">
+
+                    <div class="column-title">
+                        <div>
+                            <span class="status-dot progress-dot"></span>
+                            <h3>In Progress</h3>
+                        </div>
+
+                        <span class="task-count" id="progress-column-count">0</span>
+                    </div>
+
+                    <div class="task-list" id="progress-list"></div>
+
+                    <button class="add-column-task" data-add-status="progress">
+                        + Add task
+                    </button>
+
+                </div>
+
+
+                <div class="board-column" data-status="done">
+
+                    <div class="column-title">
+                        <div>
+                            <span class="status-dot done-dot"></span>
+                            <h3>Done</h3>
+                        </div>
+
+                        <span class="task-count" id="done-column-count">0</span>
+                    </div>
+
+                    <div class="task-list" id="done-list"></div>
+
+                    <button class="add-column-task" data-add-status="done">
+                        + Add task
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <div class="modal hidden" id="task-modal">
+
+        <div class="modal-overlay" id="modal-backdrop"></div>
+
+        <div class="modal-box">
+
+            <div class="modal-top">
+
+                <div>
+                    <p class="small-heading">TASK DETAILS</p>
+                    <h2 id="modal-title">Create a task</h2>
+                </div>
+
+                <button class="close-btn" id="close-modal">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="task-form">
+
+                <input type="hidden" id="task-id">
+
+                <label for="task-title">
+                    Task title
+                </label>
+
+                <input
+                    type="text"
+                    id="task-title"
+                    placeholder="What needs to be done?"
+                    maxlength="80"
+                    required
+                >
+
+
+                <label for="task-description">
+                    Description
+                </label>
+
+                <textarea
+                    id="task-description"
+                    placeholder="Add a short description..."
+                    maxlength="240"
+                    rows="4"
+                ></textarea>
+
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="task-priority">
+                            Priority
+                        </label>
+
+                        <select id="task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label for="task-status">
+                            Status
+                        </label>
+
+                        <select id="task-status">
+                            <option value="todo">To Do</option>
+                            <option value="progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <label for="task-due">
+                    Due date
+                </label>
+
+                <input
+                    type="date"
+                    id="task-due"
+                >
+
+
+                <p class="form-error" id="form-error"></p>
+
+
+                <button class="save-task-btn" type="submit">
+                    Save Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
